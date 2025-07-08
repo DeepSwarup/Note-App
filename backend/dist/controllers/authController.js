@@ -93,7 +93,7 @@ const googleCallback = (req, res, next) => {
         res.cookie('token', token, {
             httpOnly: true,
             secure: false,
-            sameSite: 'lax',
+            sameSite: 'none',
             maxAge: 3600000,
         });
         res.redirect('http://localhost:5173/welcome');
@@ -197,7 +197,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.cookie('token', token, {
             httpOnly: true,
             secure: false, // Set to true for HTTPS in production
-            sameSite: 'lax',
+            sameSite: 'none',
             maxAge: 3600000, // 1 hour
         });
         res.status(200).json({ message: 'Login successful', token }); // Return token for debugging
