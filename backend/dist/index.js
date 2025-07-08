@@ -22,7 +22,8 @@ const app = (0, express_1.default)();
 const port = 5000;
 app.use(express_1.default.json());
 app.use((0, cors_1.default)({
-    origin: 'http://localhost:5173',
+    // origin: 'http://localhost:5173',
+    origin: 'https://note-app-jet-eight.vercel.app',
     credentials: true, // Allow cookies to be sent
 }));
 // app.use(session({ secret: 'your-session-secret', resave: false, saveUninitialized: false }));
