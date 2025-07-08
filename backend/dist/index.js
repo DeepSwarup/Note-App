@@ -26,6 +26,11 @@ app.use((0, cors_1.default)({
     origin: 'https://note-app-jet-eight.vercel.app',
     credentials: true, // Allow cookies to be sent
 }));
+// Handle preflight requests explicitly
+app.options('*', (0, cors_1.default)({
+    origin: 'https://note-app-jet-eight.vercel.app',
+    credentials: true,
+}));
 // app.use(session({ secret: 'your-session-secret', resave: false, saveUninitialized: false }));
 app.use(passport_1.default.initialize());
 // app.use(passport.session());
@@ -49,9 +54,9 @@ app.post('/api/login-otp', authController_1.getLoginOtp);
 app.post('/api/login', authController_1.login);
 app.get('/auth/google', authController_1.googleAuth);
 app.get('/auth/google/callback', authController_1.googleCallback); // Removed duplicate callback
-app.get('/api/notes', noteController_1.getNotes);
-app.post('/api/notes', noteController_1.addNote);
-app.delete('/api/notes/:id', noteController_1.deleteNote);
+app.get('/api/notes', authController_1.authenticateToken, noteController_1.getNotes);
+app.post('/api/notes', authController_1.authenticateToken, noteController_1.addNote);
+app.delete('/api/notes/:id', authController_1.authenticateToken, noteController_1.deleteNote);
 app.post('/api/logout', authController_1.logout);
 app.get('/', (req, res) => {
     res.send('Note-Taking App Backend');

@@ -92,11 +92,11 @@ const googleCallback = (req, res, next) => {
         res.clearCookie('token');
         res.cookie('token', token, {
             httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: 'none',
             maxAge: 3600000,
         });
-        res.redirect('http://localhost:5173/welcome');
+        res.redirect('https://note-app-jet-eight.vercel.app/welcome');
     }))(req, res, next);
 };
 exports.googleCallback = googleCallback;
@@ -196,7 +196,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // Set HTTP-only cookie and return token in response
         res.cookie('token', token, {
             httpOnly: true,
-            secure: false, // Set to true for HTTPS in production
+            secure: true, // Set to true for HTTPS in production
             sameSite: 'none',
             maxAge: 3600000, // 1 hour
         });
