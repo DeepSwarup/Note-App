@@ -18,7 +18,7 @@ const Welcome: React.FC = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        // console.log('Fetching notes...');
+        console.log('Fetching notes...');
         // 1
         const response = await fetch(`${url}/api/notes`, {
           method: 'GET',
@@ -27,17 +27,17 @@ const Welcome: React.FC = () => {
           },
           credentials: 'include',
         });
-        // console.log('Fetch response status:', response.status);
+        console.log('Fetch response status:', response.status);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        // console.log('Fetch response data:', data);
+        console.log('Fetch response data:', data);
         setNotes(data.notes || []);
         setEmail(data.email || null);
         setName(data.name || 'User'); // Set name from response
       } catch (err) {
-        // console.error('Fetch notes error:', err);
+        console.error('Fetch notes error:', err);
         setError('Failed to fetch notes or unauthorized');
         navigate('/login');
       } finally {
