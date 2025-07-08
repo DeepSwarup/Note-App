@@ -92,11 +92,11 @@ export const googleCallback: RequestHandler = (
     res.clearCookie('token');
     res.cookie('token', token, {
       httpOnly: true,
-      secure: false,
-      sameSite: 'lax',
+      secure: true,
+      sameSite: 'none',
       maxAge: 3600000,
     });
-    res.redirect('http://localhost:5173/welcome');
+    res.redirect('https://note-app-jet-eight.vercel.app/welcome');
   })(req, res, next);
 };
 
@@ -210,8 +210,8 @@ export const login: RequestHandler = async (req: Request, res: Response) => {
     // Set HTTP-only cookie and return token in response
     res.cookie('token', token, {
       httpOnly: true,
-      secure: false, // Set to true for HTTPS in production
-      sameSite: 'lax',
+      secure: true, // Set to true for HTTPS in production
+      sameSite: 'none',
       maxAge: 3600000, // 1 hour
     });
     res.status(200).json({ message: 'Login successful', token }); // Return token for debugging
