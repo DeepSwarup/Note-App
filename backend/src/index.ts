@@ -1,6 +1,6 @@
 import express from 'express';
 import { MongoClient } from 'mongodb';
-import { getOtp, signup, getLoginOtp, login, googleAuth, googleCallback, logout } from './controllers/authController';
+import { getOtp, signup, getLoginOtp, login, googleAuth, googleCallback, logout, authenticateToken } from './controllers/authController';
 import { getNotes, addNote, deleteNote } from './controllers/noteController';
 import cors from 'cors';
 import session from 'express-session';
@@ -40,9 +40,9 @@ app.post('/api/login-otp', getLoginOtp);
 app.post('/api/login', login);
 app.get('/auth/google', googleAuth);
 app.get('/auth/google/callback', googleCallback); // Removed duplicate callback
-app.get('/api/notes', getNotes);
-app.post('/api/notes', addNote);
-app.delete('/api/notes/:id', deleteNote);
+app.get('/api/notes',authenticateToken,getNotes);
+app.post('/api/notes', authenticateToken,addNote);
+app.delete('/api/notes/:id', authenticateToken,deleteNote);
 app.post('/api/logout', logout);
 
 app.get('/', (req, res) => {
