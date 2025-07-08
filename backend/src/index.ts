@@ -16,6 +16,13 @@ app.use(cors({
   origin: 'https://note-app-jet-eight.vercel.app',
   credentials: true, // Allow cookies to be sent
 }));
+
+// Handle preflight requests explicitly
+app.options('*', cors({
+  origin: 'https://note-app-jet-eight.vercel.app',
+  credentials: true,
+}));
+
 // app.use(session({ secret: 'your-session-secret', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 // app.use(passport.session());
